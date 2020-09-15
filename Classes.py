@@ -10,12 +10,16 @@ meetX = 3246   # width 427 height 408
 meetY = 576    # These are the coordinates on my machine to click the "Join Meet" button, but you should reconfigure them if you're reusing this.
                # This tool should help: http://breakthrusoftware.com/html/onlinedocs/kb/installkb/ScreenCoordTool.html
                # If for some reason different classes had different join button positions, you could reconfigure the function and the way the URLs are stored so that the object also has the coords
+               # {X=3210,Y=583,Width=427,Height=408} this is a coord on the join button when there's a present button
 
-statsUrl = 'https://meet.google.com/lookup/CODE?authuser=1&hs=NUM'
-ecoUrl = 'https://meet.google.com/lookup/CODE?authuser=1&hs=NUM'
+meet2X = 3214 # New! This is to avoid not being logged into the meeting due to mismatched button placement. FIrst the script clicks the first position, then it clicks this one.
+meet2Y = 583    # So, define these coords when you see two buttons, the present and the join button.
+
+statsUrl = 'URL'
+ecoUrl = 'URL'
 #potUrl = ''
 #calcUrl = ''
-walkUrl = 'https://meet.google.com/lookup/CODE?authuser=1&hs=NUM'
+walkUrl = 'URL'
 
 
 webbrowser.register('chrome', # Creating the webdriver
@@ -29,13 +33,17 @@ def joinClass(url): # This is the function, as named, to join the class!
     pyautogui.moveTo(meetX, meetY)
     time.sleep(1) # Probably unnecessary.
     pyautogui.click()
+    time.sleep(1)
+    pyautogui.moveTo(meet2X, meet2Y) #{X=3214,Y=576,Width=427,Height=408}
+    time.sleep(1)
+    pyautogui.click()
     return
 
 # Join Stats every day at 7:45 AM
-schedule.every().day.at("07:47").do(joinClass, statsUrl) # You define a class by simply this line, but replacing "07:47" with the time of your class, and statsUrl with your URL.
+schedule.every().day.at("07:45").do(joinClass, statsUrl) # You define a class by simply this line, but replacing "07:47" with the time of your class, and statsUrl with your URL.
 
 # Join Ecology every day at 9:33 AM
-schedule.every().day.at("09:35").do(joinClass, ecoUrl)
+schedule.every().day.at("09:33").do(joinClass, ecoUrl)
 
 # TODO: Join Pottery every day at 10:34 AM
 #schedule.every().day.at("10:34").do(joinClass, potUrl)
@@ -47,7 +55,7 @@ schedule.every().day.at("09:35").do(joinClass, ecoUrl)
 schedule.every().day.at("13:54").do(joinClass, walkUrl)
 
 # Testing schedule! Change the time a minute past when you're testing, make your own Google Meet on another account to test the button placement. 
-schedule.every().day.at("08:55").do(joinClass, "https://meet.google.com/TESTCODE")
+#schedule.every().day.at("08:55").do(joinClass, "https://meet.google.com/URL")
 
 while True:
     schedule.run_pending()
