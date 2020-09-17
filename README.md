@@ -1,3 +1,10 @@
+# Classes.py vs Classes2.py
+
+I've decided to split this project into two files. Classes.py is the original file, it can join classes on its own, and it can turn off your webcam for you. You can easily add microphone disable capabilities if needed, however most calls do this automatically, for my own use case my microphone would be off by hardware anyways.
+
+Classes2.py is more the "all-in" set up. It has a leaveClass function which can leave the meeting at a certain time, but it also initializes and kills [webcamoid] (https://github.com/webcamoid/webcamoid), which I use to project a fake live video feed of myself. I find that webcamoid is easier to automate than ManyCam, uses less resources, and has a much cleaner startup and shutdown process. Classes2 will be the file I push most updates to, but I'll keep Classes.py incase someone just wants to join meets automatically.
+
+
 # Google-Meet-Joiner
 Automatically join Google Meet classes with ease!
 
