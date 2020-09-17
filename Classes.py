@@ -15,6 +15,12 @@ meetY = 576    # These are the coordinates on my machine to click the "Join Meet
 meet2X = 3214 # New! This is to avoid not being logged into the meeting due to mismatched button placement. FIrst the script clicks the first position, then it clicks this one.
 meet2Y = 583    # So, define these coords when you see two buttons, the present and the join button.
 
+# I've added a virtual webcam to my setup, but I only want it for one class, so I've now decided to define where the button is to turn off the camera in other cases.
+# {X=2678,Y=712,Width=427,Height=408}
+
+cameraX = 2678
+cameraY = 712
+
 statsUrl = 'URL'
 ecoUrl = 'URL'
 #potUrl = ''
@@ -30,6 +36,10 @@ def joinClass(url): # This is the function, as named, to join the class!
     print ("It's time for class!")
     webbrowser.get('chrome').open(url)
     time.sleep(5) # Maybe the page took some time to load.
+    if (url != walkUrl):    # For me, I only want my camera (a ManyCam virtual webcam) enabled during my Walking class, so for every other class, the camera is turned off.
+        pyautogui.moveTo(cameraX, cameraY)
+        time.sleep(1)
+        pyautogui.click()
     pyautogui.moveTo(meetX, meetY)
     time.sleep(1) # Probably unnecessary.
     pyautogui.click()
@@ -38,7 +48,6 @@ def joinClass(url): # This is the function, as named, to join the class!
     time.sleep(1)
     pyautogui.click()
     return
-
 # Join Stats every day at 7:45 AM
 schedule.every().day.at("07:45").do(joinClass, statsUrl) # You define a class by simply this line, but replacing "07:47" with the time of your class, and statsUrl with your URL.
 
@@ -55,7 +64,7 @@ schedule.every().day.at("09:33").do(joinClass, ecoUrl)
 schedule.every().day.at("13:54").do(joinClass, walkUrl)
 
 # Testing schedule! Change the time a minute past when you're testing, make your own Google Meet on another account to test the button placement. 
-#schedule.every().day.at("08:55").do(joinClass, "https://meet.google.com/URL")
+#schedule.every().day.at("08:55").do(joinClass, "https://meet.google.com/code")
 
 while True:
     schedule.run_pending()
