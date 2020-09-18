@@ -99,6 +99,8 @@ schedule.every().day.at("13:54").do(joinClass, walkUrl)
 
 schedule.every().day.at("14:09").do(leaveClass)
 
+schedule.every().day.at("14:10").do(killCam)
+
 # Testing schedule! Change the time a minute past when you're testing, make your own Google Meet on another account to test the button placement. 
 #schedule.every().day.at("08:55").do(joinClass, "https://meet.google.com/code")
 
