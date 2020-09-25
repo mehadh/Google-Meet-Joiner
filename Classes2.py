@@ -23,11 +23,11 @@ meet2Y = 583    # So, define these coords when you see two buttons, the present 
 cameraX = 2678
 cameraY = 712
 
-statsUrl = 'https://meet.google.com/lookup/gjftx4nhwq?authuser=1&hs=179'
-ecoUrl = 'https://meet.google.com/lookup/br2ozwm7ey?authuser=1&hs=179'
+statsUrl = ''
+ecoUrl = ''
 #potUrl = ''
 #calcUrl = ''
-walkUrl = 'https://meet.google.com/lookup/d6tzj5ljdi?authuser=1&hs=179'
+walkUrl = ''
 
 
 webbrowser.register('chrome', # Creating the webdriver
